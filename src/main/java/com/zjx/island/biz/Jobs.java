@@ -63,7 +63,7 @@ public class Jobs {
     public void xidanMovieJob() {
         logger.info("开始执行查询");
         QueryModel queryModel0 = new QueryModel("大侦探皮卡丘", "346629",
-            Constant.CinemaConstants.CinemaName.XINHUADAZHONGSI, Constant.CinemaConstants.CinemaId.XINHUADAZHONGSI, 5, 10);
+            Constant.CinemaConstants.CinemaName.XINHUADAZHONGSI, Constant.CinemaConstants.CinemaId.XINHUADAZHONGSI, 5, 11);
         QueryModel queryModel1 = new QueryModel("我的英雄学院", "1220571",
             Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 3, 17);
         QueryModel queryModel2 = new QueryModel("我的英雄学院", "1220571",
