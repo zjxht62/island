@@ -59,7 +59,7 @@ public class Jobs {
 
 
 //    @Scheduled(cron = "0 5 9,11,13,15,17,19,21,23 * * ?")
-    @Scheduled(fixedDelay = 30 * ONE_MINUTE)
+    @Scheduled(fixedDelay = 20 * ONE_MINUTE)
     public void xidanMovieJob() {
         logger.info("开始执行查询");
         QueryModel queryModel0 = new QueryModel("大侦探皮卡丘", "346629",
