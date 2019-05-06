@@ -18,9 +18,9 @@ public class DingdingRobotUtil {
 
     public static DingtalkChatbotClient client = new DingtalkChatbotClient();
 
-    public static void testSendTextMessage(String toSend) throws Exception {
+    public static void testSendTextMessage(String toSend, String robotUrl) throws Exception {
         TextMessage message = new TextMessage(toSend);
-        SendResult result = client.send(Constant.url.ROBOT_URL, message);
+        SendResult result = client.send(robotUrl, message);
         System.out.println(result);
     }
 

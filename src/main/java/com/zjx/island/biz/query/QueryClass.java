@@ -1,9 +1,13 @@
 package com.zjx.island.biz.query;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.zjx.island.biz.Jobs;
 import com.zjx.island.misc.Constant;
 import com.zjx.island.model.CinemaModel;
 import com.zjx.island.utils.DingdingRobotUtil;
+import com.zjx.island.utils.HTMLUtil;
+import com.zjx.island.utils.HttpUWUtil;
 import org.apache.log4j.Logger;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -79,7 +83,7 @@ public class QueryClass {
             if (stringBuilder.toString().contains(queryDate)) {
                 logger.info("发钉钉信息\n" + stringBuilder.toString());
                 try {
-                    DingdingRobotUtil.testSendTextMessage(stringBuilder.toString());
+                    DingdingRobotUtil.testSendTextMessage(stringBuilder.toString(), Constant.url.MOVIE_ROBOT_URL);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -89,6 +93,50 @@ public class QueryClass {
             stringBuilder.delete(0, stringBuilder.length());
 //        }
 
+
+    }
+
+    public void queryBus(List<String> getURLs) {
+        String getResult = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        try {
+            for (int i = 0; i < getURLs.size(); i++) {
+                getResult = HttpUWUtil.doGetStr(getURLs.get(i));
+                JSONObject jsonObject = JSON.parseObject(getResult);
+                String html = jsonObject.get("html").toString();
+                Document document = HTMLUtil.getDocument(html);
+                Element lh = document.select("#lh").get(0);
+                Element article = document.selectFirst("article");
+                Element p0 = article.selectFirst("p");
+                Element p1 = article.select("p").get(1);
+                stringBuilder.append(lh.text() + "\n" + p0.text() + "\n" + p1.text() + "\n");
+
+
+
+
+
+            }
+
+                logger.info("发钉钉信息\n" + stringBuilder.toString());
+                try {
+                    DingdingRobotUtil.testSendTextMessage(stringBuilder.toString(), Constant.url.BUS_ROBOT_URL);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            stringBuilder.delete(0, stringBuilder.length());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+    public static void main(String[] args) {
 
     }
 

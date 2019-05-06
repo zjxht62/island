@@ -33,7 +33,8 @@ public class Constant {
 
 
     public class url {
-        public static final String ROBOT_URL = "https://oapi.dingtalk.com/robot/send?access_token=4215396463de47bb567aa58d7fee57b983cd2c2ecfcce03bee634d1b4c8170a7";
+        public static final String MOVIE_ROBOT_URL = "https://oapi.dingtalk.com/robot/send?access_token=4215396463de47bb567aa58d7fee57b983cd2c2ecfcce03bee634d1b4c8170a7";
+        public static final String BUS_ROBOT_URL = "https://oapi.dingtalk.com/robot/send?access_token=1dd7f53223ecc30f9fba802efba1e89b3c64ba6d0011bbf28b0d3e799f78e673";
 
     }
 

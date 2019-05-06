@@ -81,35 +81,17 @@ public class Jobs {
 //        queryClass.queryMovies(queryModel4);
     }
 
-//        StringBuilder stringBuilder = new StringBuilder();
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-//        Document document = getDocument(getSource("https://maoyan.com/cinema/149?poi=283722&movieId=457445"));
-//        Elements elements = document.select(".show-list");
-//        stringBuilder.append("掠食城市排片:\n");
-//        for (Element element : elements) {
-//            if (element.select(".movie-name:contains(掠食城市)").toString().length() != 0) {
-//                for (int i = 0; i < element.select(".date-item").size(); i++) {
-//                    String day = element.select(".date-item").get(i).html();
-//                    if (day.contains("19")) {
-//                        stringBuilder.append(day + "\n" + "  放映时间\n");
-//                    } else {
-//                        continue;
-//                    }
-//                    Elements times = element.select("tbody").get(i).select(".begin-time");
-//                    for (Element time : times) {
-//                        stringBuilder.append("    " + time.html() + "\n");
-//                    }
-//
-//                }
-//
-//            }
-//        }
-//        System.out.println(stringBuilder.toString());
-//        if (stringBuilder.toString().contains("月19")) {
-//            EmailUtil.send("trevor.zhao@trustlife.com",stringBuilder.toString() + "\n当前时间" + df.format(new Date()), false,"定时任务--查询排片--西单");
-//        }
-//        stringBuilder.delete(0, stringBuilder.length());
-//    }
+
+    @Scheduled(cron = "0 39,41,43 7 * * ?")
+    public void busJob() {
+        QueryClass queryClass = new QueryClass();
+        List<String> urls = new ArrayList<>();
+        urls.add("http://www.bjbus.com/home/ajax_rtbus_data.php?act=busTime&selBLine=597&selBDir=5657287355409450625&selBStop=15");
+        urls.add("http://www.bjbus.com/home/ajax_rtbus_data.php?act=busTime&selBLine=325&selBDir=4813407732721612399&selBStop=16");
+        queryClass.queryBus(urls);
+    }
+
+
 
 
     public static void main(String[] args) {
