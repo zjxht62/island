@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.zjx.island.utils.HTMLUtil.getDocument;
@@ -83,7 +84,7 @@ public class QueryClass {
             if (stringBuilder.toString().contains(queryDate)) {
                 logger.info("发钉钉信息\n" + stringBuilder.toString());
                 try {
-                    DingdingRobotUtil.testSendTextMessage(stringBuilder.toString(), Constant.url.MOVIE_ROBOT_URL);
+                    DingdingRobotUtil.testSendTextMessage(df.format(new Date()) + "\n" + stringBuilder.toString(), Constant.url.MOVIE_ROBOT_URL);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
