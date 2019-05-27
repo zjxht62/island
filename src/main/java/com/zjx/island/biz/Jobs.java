@@ -77,7 +77,7 @@ public class Jobs {
 //        queryClass.queryMovies(queryModel0);
         queryClass.queryMovies(queryModel1);
 //        queryClass.queryMovies(queryModel2);
-        queryClass.queryMovies(queryModel3);
+//        queryClass.queryMovies(queryModel3);
         queryClass.queryMovies(queryModel4);
     }
 
