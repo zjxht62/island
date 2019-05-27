@@ -62,27 +62,27 @@ public class Jobs {
     @Scheduled(fixedDelay = 20 * ONE_MINUTE)
     public void xidanMovieJob() {
         logger.info("开始执行查询");
-        QueryModel queryModel0 = new QueryModel("大侦探皮卡丘", "346629",
-            Constant.CinemaConstants.CinemaName.XINHUADAZHONGSI, Constant.CinemaConstants.CinemaId.XINHUADAZHONGSI, 5, 11);
-        QueryModel queryModel1 = new QueryModel("我的英雄学院", "1220571",
-            Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 3, 17);
-        QueryModel queryModel2 = new QueryModel("我的英雄学院", "1220571",
-            Constant.CinemaConstants.CinemaName.XIDAN, Constant.CinemaConstants.CinemaId.XIDAN, 3, 17);
-        QueryModel queryModel3 = new QueryModel("我的英雄学院", "1220571",
-            Constant.CinemaConstants.CinemaName.WANGFUJING_APM, Constant.CinemaConstants.CinemaId.WANGFUJING_APM, 3, 17);
-        QueryModel queryModel4 = new QueryModel("我的英雄学院", "1220571",
-            Constant.CinemaConstants.CinemaName.SHIJINGSHANWANDA, Constant.CinemaConstants.CinemaId.SHIJINGSHANWANDA, 3, 17);
+        QueryModel queryModel0 = new QueryModel("阿拉丁", "1207959",
+            Constant.CinemaConstants.CinemaName.XIDAN, Constant.CinemaConstants.CinemaId.XIDAN, 5, 29);
+        QueryModel queryModel1 = new QueryModel("阿拉丁", "1207959",
+            Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 5, 29);
+        QueryModel queryModel2 = new QueryModel("阿拉丁", "1207959",
+            Constant.CinemaConstants.CinemaName.HENGDIAN, Constant.CinemaConstants.CinemaId.HENGDIAN, 5, 29);
+        QueryModel queryModel3 = new QueryModel("阿拉丁", "1207959",
+            Constant.CinemaConstants.CinemaName.WANGFUJING_APM, Constant.CinemaConstants.CinemaId.WANGFUJING_APM, 5, 29);
+        QueryModel queryModel4 = new QueryModel("阿拉丁", "1207959",
+            Constant.CinemaConstants.CinemaName.WANGFUJING_YAOLAI, Constant.CinemaConstants.CinemaId.WANGFUJING_YAOLAI, 5, 29);
 
         QueryClass queryClass = new QueryClass();
-        queryClass.queryMovies(queryModel0);
-//        queryClass.queryMovies(queryModel1);
+//        queryClass.queryMovies(queryModel0);
+        queryClass.queryMovies(queryModel1);
 //        queryClass.queryMovies(queryModel2);
-//        queryClass.queryMovies(queryModel3);
-//        queryClass.queryMovies(queryModel4);
+        queryClass.queryMovies(queryModel3);
+        queryClass.queryMovies(queryModel4);
     }
 
 
-    @Scheduled(cron = "0 39,41,43 7 * * ?")
+//    @Scheduled(cron = "0 39,41,43 7 * * ?")
     public void busJob() {
         QueryClass queryClass = new QueryClass();
         List<String> urls = new ArrayList<>();
