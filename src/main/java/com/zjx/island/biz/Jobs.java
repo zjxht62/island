@@ -63,7 +63,7 @@ public class Jobs {
     public void xidanMovieJob() {
         logger.info("开始执行查询");
         QueryModel queryModel0 = new QueryModel("千与千寻", "1212",
-            Constant.CinemaConstants.CinemaName.SANLITUN, Constant.CinemaConstants.CinemaId.SANLITUN, 6, 22);
+            Constant.CinemaConstants.CinemaName.XIDAN, Constant.CinemaConstants.CinemaId.XIDAN, 6, 22);
 //        QueryModel queryModel1 = new QueryModel("阿拉丁", "1207959",
 //            Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 5, 29);
 //        QueryModel queryModel2 = new QueryModel("阿拉丁", "1207959",
