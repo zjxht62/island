@@ -62,23 +62,26 @@ public class Jobs {
     @Scheduled(fixedDelay = 5 * ONE_MINUTE)
     public void xidanMovieJob() {
         logger.info("开始执行查询");
-        QueryModel queryModel0 = new QueryModel("千与千寻", "1212",
-            Constant.CinemaConstants.CinemaName.XIDAN, Constant.CinemaConstants.CinemaId.XIDAN, 6, 22);
-//        QueryModel queryModel1 = new QueryModel("阿拉丁", "1207959",
-//            Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 5, 29);
-//        QueryModel queryModel2 = new QueryModel("阿拉丁", "1207959",
-//            Constant.CinemaConstants.CinemaName.HENGDIAN, Constant.CinemaConstants.CinemaId.HENGDIAN, 5, 29);
-//        QueryModel queryModel3 = new QueryModel("阿拉丁", "1207959",
-//            Constant.CinemaConstants.CinemaName.WANGFUJING_APM, Constant.CinemaConstants.CinemaId.WANGFUJING_APM, 5, 29);
-//        QueryModel queryModel4 = new QueryModel("阿拉丁", "1207959",
-//            Constant.CinemaConstants.CinemaName.WANGFUJING_YAOLAI, Constant.CinemaConstants.CinemaId.WANGFUJING_YAOLAI, 5, 29);
+        QueryModel queryModel0 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
+            Constant.CinemaConstants.CinemaName.WUKESONG, Constant.CinemaConstants.CinemaId.WUKESONG, 7, 20);
+        QueryModel queryModel1 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
+            Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 7, 20);
+        QueryModel queryModel2 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
+            Constant.CinemaConstants.CinemaName.HENGDIAN, Constant.CinemaConstants.CinemaId.HENGDIAN, 7, 20);
+        QueryModel queryModel3 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
+            Constant.CinemaConstants.CinemaName.WANGFUJING_APM, Constant.CinemaConstants.CinemaId.WANGFUJING_APM, 7, 20);
+        QueryModel queryModel4 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
+            Constant.CinemaConstants.CinemaName.WANGFUJING_YAOLAI, Constant.CinemaConstants.CinemaId.WANGFUJING_YAOLAI, 7, 20);
+        QueryModel queryModel5 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
+            Constant.CinemaConstants.CinemaName.DIZHILITANG, Constant.CinemaConstants.CinemaId.DIZHILITANG, 7, 20);
 
         QueryClass queryClass = new QueryClass();
         queryClass.queryMovies(queryModel0);
-//        queryClass.queryMovies(queryModel1);
-//        queryClass.queryMovies(queryModel2);
-//        queryClass.queryMovies(queryModel3);
-//        queryClass.queryMovies(queryModel4);
+        queryClass.queryMovies(queryModel1);
+        queryClass.queryMovies(queryModel2);
+        queryClass.queryMovies(queryModel3);
+        queryClass.queryMovies(queryModel4);
+        queryClass.queryMovies(queryModel5);
     }
 
 
