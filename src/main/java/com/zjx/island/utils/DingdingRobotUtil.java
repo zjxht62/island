@@ -4,7 +4,6 @@ import com.dingtalk.chatbot.DingtalkChatbotClient;
 import com.dingtalk.chatbot.SendResult;
 import com.dingtalk.chatbot.demo.TestConfig;
 import com.dingtalk.chatbot.message.TextMessage;
-import com.zjx.island.misc.Constant;
 
 import java.util.ArrayList;
 

@@ -1,9 +1,9 @@
 package com.zjx.island.biz;
 
-import com.zjx.island.biz.auto.MyTest;
-import com.zjx.island.biz.query.QueryClass;
-import com.zjx.island.biz.query.QueryModel;
-import com.zjx.island.misc.Constant;
+import com.zjx.island.biz.islanddeal.IslandAutomation;
+import com.zjx.island.biz.moviequery.QueryClass;
+import com.zjx.island.biz.moviequery.QueryModel;
+import com.zjx.island.common.Constant;
 import com.zjx.island.model.OrderModel;
 import com.zjx.island.model.PersonModel;
 import org.apache.log4j.Logger;
@@ -50,7 +50,7 @@ public class Jobs {
 //        orderModel.setAviliable(true);
         if (orderModel.getAviliable() && hasOrdered == false) {
             for (int i = 0; i <personModels.size(); i++) {
-                MyTest.deal(personModels.get(i));
+                IslandAutomation.deal(personModels.get(i));
             }
             hasOrdered = true;
 //            EmailUtil.send("trevor.zhao@trustlife.com", orderModel.getAviliableString() + "当前时间" + df.format(new Date()), false,"晓岛目前可以预约啦");
@@ -59,7 +59,7 @@ public class Jobs {
 
 
 //    @Scheduled(cron = "0 5 9,11,13,15,17,19,21,23 * * ?")
-    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
+//    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
     public void xidanMovieJob() {
         logger.info("开始执行查询");
         QueryModel queryModel0 = new QueryModel("哪吒之魔童降世", "1211270",
