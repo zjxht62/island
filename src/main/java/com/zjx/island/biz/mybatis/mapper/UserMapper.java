@@ -1,6 +1,8 @@
 package com.zjx.island.biz.mybatis.mapper;
 
 import com.zjx.island.biz.mybatis.first.User;
+import com.zjx.island.biz.mybatis.vo.UserCustom;
+import com.zjx.island.biz.mybatis.vo.UserQueryVo;
 
 import java.util.List;
 
@@ -25,4 +27,13 @@ public interface UserMapper {
 
     //更新用户
     public void updateUser(User user)throws Exception;
+
+    //用户信息综合查询
+    public List<UserCustom> findUserList(UserQueryVo userQueryVo) throws Exception;
+
+    //用户信息综合查询总数
+    public int findUserCount(UserQueryVo userQueryVo) throws Exception;
+
+    //根据ID查询用户信息，使用resultMap输出
+    public User findUserByIdResultMap(int id) throws Exception;
 }
