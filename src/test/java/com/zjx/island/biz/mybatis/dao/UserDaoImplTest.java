@@ -24,7 +24,7 @@ public class UserDaoImplTest {
         // 创建sqlSessionFactory
 
         // mybatis配置文件
-        String resource = "com/zjx/island/biz/mybatis/mapper/SqlMapConfig.xml";
+        String resource = "SqlMapConfig.xml";
         // 得到配置文件流
         InputStream inputStream = Resources.getResourceAsStream(resource);
 

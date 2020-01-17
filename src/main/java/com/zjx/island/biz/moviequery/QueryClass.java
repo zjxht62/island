@@ -111,10 +111,6 @@ public class QueryClass {
                 Element p1 = article.select("p").get(1);
                 stringBuilder.append(lh.text() + "\n" + p0.text() + "\n" + p1.text() + "\n");
 
-
-
-
-
             }
 
                 logger.info("发钉钉信息\n" + stringBuilder.toString());
@@ -129,14 +125,11 @@ public class QueryClass {
             e.printStackTrace();
         }
 
-
-
-
-
     }
 
     public static void main(String[] args) {
 
     }
+
 
 }

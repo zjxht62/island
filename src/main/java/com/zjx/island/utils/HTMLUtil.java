@@ -83,50 +83,58 @@ public class HTMLUtil {
         return orderModel;
     }
 
-    public static void main(String[] args) {
-
-        StringBuilder stringBuilder = new StringBuilder();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        Document document = Jsoup.parse(getSource("https://maoyan.com/cinema/149?poi=283722&movieId=345808"));
-        Elements elements = document.select(".show-list");
-        stringBuilder.append("掠食城市排片:\n");
-        for (Element element : elements) {
-            if (element.select(".movie-name:contains(死侍)").toString().length() != 0) {
-                for (int i = 0; i < element.select(".date-item").size(); i++) {
-                    String day = element.select(".date-item").get(i).html();
-                    if (day.contains("31")) {
-                        stringBuilder.append(day + "\n" + "  放映时间\n");
-                    } else {
-                        continue;
-                    }
-//                    Elements times = element.select("tbody").get(i).select(".begin-time");
-//                    for (Element time : times) {
-//                        stringBuilder.append("    " + time.html() + "\n");
+//    public static void main(String[] args) {
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//        Document document = Jsoup.parse(getSource("https://maoyan.com/cinema/149?poi=283722&movieId=345808"));
+//        Elements elements = document.select(".show-list");
+//        stringBuilder.append("掠食城市排片:\n");
+//        for (Element element : elements) {
+//            if (element.select(".movie-name:contains(死侍)").toString().length() != 0) {
+//                for (int i = 0; i < element.select(".date-item").size(); i++) {
+//                    String day = element.select(".date-item").get(i).html();
+//                    if (day.contains("31")) {
+//                        stringBuilder.append(day + "\n" + "  放映时间\n");
+//                    } else {
+//                        continue;
 //                    }
-                    Elements movieTimes = element.select("tbody");
-                    for (int j = 0; j < movieTimes.get(i).select(".begin-time").size(); j++) {
-                        stringBuilder.append(movieTimes.get(i).select(".begin-time").get(j).html() + "\n"
-                            + movieTimes.get(i).select(".end-time").get(j).html());
-                    }
+////                    Elements times = element.select("tbody").get(i).select(".begin-time");
+////                    for (Element time : times) {
+////                        stringBuilder.append("    " + time.html() + "\n");
+////                    }
+//                    Elements movieTimes = element.select("tbody");
+//                    for (int j = 0; j < movieTimes.get(i).select(".begin-time").size(); j++) {
+//                        stringBuilder.append(movieTimes.get(i).select(".begin-time").get(j).html() + "\n"
+//                            + movieTimes.get(i).select(".end-time").get(j).html());
+//                    }
+//
+//
+//
+//
+//                    Elements beginTimes = element.select("tbody").get(i).select(".begin-time");
+//                    Elements endTimes = element.select("tbody").get(i).select(".end-time");
+//                    for (Element beginTime : beginTimes) {
+//                        stringBuilder.append("    " + beginTime.html() + "\n");
+//                    }
+//                    for (Element endTime : endTimes) {
+//                        stringBuilder.append("    " + endTime.html() + "\n");
+//                    }
+//                }
+//
+//            }
+//        }
+//        System.out.println(stringBuilder.toString());
+////        System.out.println(elements);
+////        System.out.println(document.select(".show-list .movie-name:contains(掠食城市)"));
+//
+//    }
 
-
-
-
-                    Elements beginTimes = element.select("tbody").get(i).select(".begin-time");
-                    Elements endTimes = element.select("tbody").get(i).select(".end-time");
-                    for (Element beginTime : beginTimes) {
-                        stringBuilder.append("    " + beginTime.html() + "\n");
-                    }
-                    for (Element endTime : endTimes) {
-                        stringBuilder.append("    " + endTime.html() + "\n");
-                    }
-                }
-
-            }
+    public static void main(String[] args) {
+        Document document = getDocument("<option value=\"\">请选择行车方向</option><option value=\"4735093507032488486\">52(平乐园-靛厂新村)</option><option value=\"5576015467968999475\">52(靛厂新村-平乐园)</option>");
+        Elements options = document.select("option");
+        for (Element element : options) {
+            System.out.println(element);
         }
-        System.out.println(stringBuilder.toString());
-//        System.out.println(elements);
-//        System.out.println(document.select(".show-list .movie-name:contains(掠食城市)"));
-
     }
 }

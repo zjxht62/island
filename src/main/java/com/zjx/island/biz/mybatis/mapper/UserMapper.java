@@ -1,6 +1,8 @@
 package com.zjx.island.biz.mybatis.mapper;
 
 import com.zjx.island.biz.mybatis.first.User;
+import com.zjx.island.biz.mybatis.po.Orders;
+import com.zjx.island.biz.mybatis.po.OrdersCustom;
 import com.zjx.island.biz.mybatis.vo.UserCustom;
 import com.zjx.island.biz.mybatis.vo.UserQueryVo;
 
@@ -36,4 +38,13 @@ public interface UserMapper {
 
     //根据ID查询用户信息，使用resultMap输出
     public User findUserByIdResultMap(int id) throws Exception;
+
+    //查询订单关联查询用户信息
+    public List<OrdersCustom> findOrdersUser()throws Exception;
+
+    //查询订单关联查询用户使用resultMap
+    public List<Orders> findOrdersUserResultMap()throws Exception;
+
+    //查询用户购买商品信息
+    public List<com.zjx.island.biz.mybatis.po.User>  findUserAndItemsResultMap()throws Exception;
 }

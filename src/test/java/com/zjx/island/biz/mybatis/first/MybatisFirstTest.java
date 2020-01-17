@@ -24,7 +24,7 @@ public class MybatisFirstTest {
     @Test
     public void findUserByIdTest() throws IOException {
         // mybatis配置文件
-        String resource = "com/zjx/island/biz/mybatis/mapper/SqlMapConfig.xml";
+        String resource = "SqlMapConfig.xml";
         // 得到配置文件流
         InputStream inputStream = Resources.getResourceAsStream(resource);
         //创建会话工厂，传入mybatis配置文件的信息
@@ -51,7 +51,7 @@ public class MybatisFirstTest {
     @Test
     public void findUserByNameTest() throws IOException {
         // mybatis配置文件
-        String resource = "com/zjx/island/biz/mybatis/mapper/SqlMapConfig.xml";
+        String resource = "SqlMapConfig.xml";
         // 得到配置文件流
         InputStream inputStream = Resources.getResourceAsStream(resource);
 
@@ -74,7 +74,7 @@ public class MybatisFirstTest {
      */
     @Test
     public void insertUserTest() throws IOException {
-        String resource = "com/zjx/island/biz/mybatis/mapper/SqlMapConfig.xml";
+        String resource = "SqlMapConfig.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 

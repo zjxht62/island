@@ -27,7 +27,7 @@ public class UserMapperTest {
     @Before
     public void setup() throws Exception{
         //创建SqlSessionFactory
-        String resource="com/zjx/island/biz/mybatis/mapper/SqlMapConfig.xml";
+        String resource= "SqlMapConfig.xml";
 
         //将配置文件加载成流
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -121,6 +121,24 @@ public class UserMapperTest {
         User user = userMapper.findUserByIdResultMap(1);
 
         System.out.println(user);
+
+
+    }
+
+
+    @Test
+    public void testFindOrdersUser() throws Exception {
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //创建UserMapper对象，mybatis自动生成mapper代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        //调用userMapper的方法
+
+        List<com.zjx.island.biz.mybatis.po.User> resultList = userMapper.findUserAndItemsResultMap();
+
+        System.out.println(resultList);
 
 
     }
