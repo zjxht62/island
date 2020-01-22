@@ -4,8 +4,9 @@ package com.zjx.island.biz.excel;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import sun.misc.BASE64Decoder;
 
+import java.util.Base64;
+import java.util.Base64.Decoder;
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -31,7 +32,8 @@ public class ExcelUtils {
 
 
     private static void decoderBase64File(String base64Code, String targetPath) throws Exception {
-        byte[] buffer = new BASE64Decoder().decodeBuffer(base64Code);
+        Decoder decoder = Base64.getDecoder();
+        byte[] buffer = decoder.decode(base64Code);
         FileOutputStream out = new FileOutputStream(targetPath);
         out.write(buffer);
         out.close();
