@@ -1,5 +1,9 @@
 package com.zjx.island.biz;
 
+import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaAllBoard;
+import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaBeijingBoard;
+import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaData;
+import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaDataCollector;
 import com.zjx.island.biz.islanddeal.IslandAutomation;
 import com.zjx.island.biz.moviequery.QueryClass;
 import com.zjx.island.biz.moviequery.QueryModel;
@@ -94,12 +98,34 @@ public class Jobs {
         queryClass.queryBus(urls);
     }
 
+    @Scheduled(fixedDelay = 30 * ONE_MINUTE)
+    public void pneumoniaJob() {
+
+        PneumoniaData pneumoniaData = new PneumoniaData();
+        PneumoniaAllBoard pneumoniaAllBoard = new PneumoniaAllBoard(pneumoniaData);
+        PneumoniaBeijingBoard pneumoniaBeijingBoard = new PneumoniaBeijingBoard(pneumoniaData);
+
+        PneumoniaDataCollector pneumoniaDataCollector = new PneumoniaDataCollector();
+
+        PneumoniaData resultData = pneumoniaDataCollector.getResult();
+        pneumoniaData.setUntilTime(resultData.getUntilTime());
+        pneumoniaData.setBeijingNums(resultData.getBeijingNums());
+        pneumoniaData.setAllStatus(resultData.getAllStatus());
+        pneumoniaData.dataChanged();
+
+
+
+
+
+    }
+
+
+
 
 
 
     public static void main(String[] args) {
         try {
-//            DingdingRobotUtil.testSendTextMessage();
         } catch (Exception e) {
 
         }

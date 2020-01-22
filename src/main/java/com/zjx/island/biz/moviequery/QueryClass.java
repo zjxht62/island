@@ -131,5 +131,10 @@ public class QueryClass {
 
     }
 
+//    public Document getDocument(String url) {
+//        Document document = getDocument(getSource("https://maoyan.com/cinema/" + queryModel.getCinemaId() + "?poi=283722&movieId=" + queryModel.getMovieId()));
+//
+//    }
+
 
 }
