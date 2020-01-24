@@ -103,7 +103,7 @@ public class Jobs {
 
         PneumoniaData pneumoniaData = new PneumoniaData();
         PneumoniaAllBoard pneumoniaAllBoard = new PneumoniaAllBoard(pneumoniaData);
-        PneumoniaBeijingBoard pneumoniaBeijingBoard = new PneumoniaBeijingBoard(pneumoniaData);
+//        PneumoniaBeijingBoard pneumoniaBeijingBoard = new PneumoniaBeijingBoard(pneumoniaData);
 
         PneumoniaDataCollector pneumoniaDataCollector = new PneumoniaDataCollector();
 
