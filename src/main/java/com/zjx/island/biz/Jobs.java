@@ -108,6 +108,7 @@ public class Jobs {
         PneumoniaDataCollector pneumoniaDataCollector = new PneumoniaDataCollector();
 
         PneumoniaData resultData = pneumoniaDataCollector.getResult();
+        logger.info(resultData);
         pneumoniaData.setUntilTime(resultData.getUntilTime());
         pneumoniaData.setBeijingNums(resultData.getBeijingNums());
         pneumoniaData.setAllStatus(resultData.getAllStatus());
