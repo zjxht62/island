@@ -98,7 +98,7 @@ public class Jobs {
         queryClass.queryBus(urls);
     }
 
-    @Scheduled(fixedDelay = 30 * ONE_MINUTE)
+    @Scheduled(fixedDelay = 60 * ONE_MINUTE)
     public void pneumoniaJob() {
 
         PneumoniaData pneumoniaData = new PneumoniaData();
