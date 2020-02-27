@@ -24,7 +24,7 @@ public class QueryTicketModel {
     /**
      * 电影院列表
      */
-    private List<CinemaModel> cinemaModelList;
+    private List<Cinema> cinemaModelList;
 
     /**
      * 观影日期
@@ -36,7 +36,7 @@ public class QueryTicketModel {
 
     }
 
-    public QueryTicketModel(String movieName, String movieId, List<CinemaModel> cinemaModelList, Date movieDate) {
+    public QueryTicketModel(String movieName, String movieId, List<Cinema> cinemaModelList, Date movieDate) {
         this.movieName = movieName;
         this.movieId = movieId;
         this.cinemaModelList = cinemaModelList;
@@ -59,11 +59,11 @@ public class QueryTicketModel {
         this.movieId = movieId;
     }
 
-    public List<CinemaModel> getCinemaModelList() {
+    public List<Cinema> getCinemaModelList() {
         return cinemaModelList;
     }
 
-    public void setCinemaModelList(List<CinemaModel> cinemaModelList) {
+    public void setCinemaModelList(List<Cinema> cinemaModelList) {
         this.cinemaModelList = cinemaModelList;
     }
 

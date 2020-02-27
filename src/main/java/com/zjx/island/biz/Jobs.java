@@ -4,10 +4,9 @@ import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaAllBoard;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaData;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaDataCollector;
 import com.zjx.island.biz.islanddeal.IslandAutomation;
-import com.zjx.island.biz.moviequery.CinemaModel;
-import com.zjx.island.biz.moviequery.QueryClass;
+import com.zjx.island.biz.moviequery.Cinema;
+import com.zjx.island.biz.moviequery.QueryHandler;
 import com.zjx.island.biz.moviequery.QueryTicketModel;
-import com.zjx.island.common.Constant;
 import com.zjx.island.model.OrderModel;
 import com.zjx.island.model.PersonModel;
 import org.apache.log4j.Logger;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -65,29 +63,32 @@ public class Jobs {
 
 //    @Scheduled(cron = "0 5 9,11,13,15,17,19,21,23 * * ?")
     @Scheduled(fixedDelay = 5 * ONE_MINUTE)
-    public void xidanMovieJob() {
+    public void queryMovieJob() {
+
+        //初始化要查询的影院list
+        List<Cinema> cinemaList = new ArrayList<>();
+        cinemaList.add(Cinema.LUMIAI);
+
+        //初始化查询的model
+        QueryTicketModel queryTicketModel0 = new QueryTicketModel("冰雪奇缘2", "247949", cinemaList, new Date(2020, 2, 1));
+
+        //新建查询处理器
+        QueryHandler queryHandler = new QueryHandler();
+
+        //执行查询
         logger.info("开始执行查询");
-
-        List<CinemaModel> cinemaModelList = new ArrayList<>();
-        cinemaModelList.add(new CinemaModel(Constant.CinemaConstants.CinemaName.LUMIAI, Constant.CinemaConstants.CinemaId.LUMIAI));
-        cinemaModelList.add(new CinemaModel(Constant.CinemaConstants.CinemaName.LUMIAI, Constant.CinemaConstants.CinemaId.LUMIAI));
-
-        QueryTicketModel queryTicketModel0 = new QueryTicketModel("冰雪奇缘2", "247949", cinemaModelList, new Date(2020, 2, 1));
-
-
-        QueryClass queryClass = new QueryClass();
-        queryClass.queryOneMovie(queryTicketModel0);
+        queryHandler.queryOneMovie(queryTicketModel0);
 
     }
 
 
 //    @Scheduled(cron = "0 39,41,43 7 * * ?")
     public void busJob() {
-        QueryClass queryClass = new QueryClass();
+        QueryHandler queryHandler = new QueryHandler();
         List<String> urls = new ArrayList<>();
         urls.add("http://www.bjbus.com/home/ajax_rtbus_data.php?act=busTime&selBLine=597&selBDir=5657287355409450625&selBStop=15");
         urls.add("http://www.bjbus.com/home/ajax_rtbus_data.php?act=busTime&selBLine=325&selBDir=4813407732721612399&selBStop=16");
-        queryClass.queryBus(urls);
+        queryHandler.queryBus(urls);
     }
 
 //    @Scheduled(fixedDelay = 60 * ONE_MINUTE)

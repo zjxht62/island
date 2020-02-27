@@ -19,15 +19,15 @@ import static com.zjx.island.utils.HTMLUtil.getDocument;
 import static com.zjx.island.utils.HTMLUtil.getSource;
 
 /**
- * Demo class
+ * 查询处理器
  *
  * @author trevor.zhao
  * @date 2019/1/31
  */
-public class QueryClass {
-    private static final Logger logger = Logger.getLogger(QueryClass.class);
+public class QueryHandler {
+    private static final Logger logger = Logger.getLogger(QueryHandler.class);
 
-    public QueryClass() {
+    public QueryHandler() {
 
     }
 
@@ -52,10 +52,10 @@ public class QueryClass {
         logger.info("转换之后的日期:" + queryDate);
         StringBuilder stringBuilder = new StringBuilder();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        for (CinemaModel cinemaModel : queryTicketModel.getCinemaModelList()) {
-            Document document = getDocument(getSource("https://maoyan.com/cinema/" + cinemaModel.getCinemaId() + "?poi=283722&movieId=" + queryTicketModel.getMovieId()));
+        for (Cinema cinema : queryTicketModel.getCinemaModelList()) {
+            Document document = getDocument(getSource("https://maoyan.com/cinema/" + cinema.getCinemaId() + "?poi=283722&movieId=" + queryTicketModel.getMovieId()));
             Elements elements = document.select(".show-list");
-            stringBuilder.append("ฅ՞•ﻌ•՞ฅ 任务执行~喵~\n" + "影院名称喵~\n" + "        " + cinemaModel.getCinemaName() + "\n" + "想看的电影喵~\n" + "        " + queryTicketModel.getMovieName() + "\n日期喵~\n");
+            stringBuilder.append("ฅ՞•ﻌ•՞ฅ 任务执行~喵~\n" + "影院名称喵~\n" + "        " + cinema.getCinemaName() + "\n" + "想看的电影喵~\n" + "        " + queryTicketModel.getMovieName() + "\n日期喵~\n");
             for (Element element : elements) {
                 if (element.select(".movie-name:contains(" + queryTicketModel.getMovieName() + ")").toString().length() != 0) {
                     for (int j = 0; j < element.select(".date-item").size(); j++) {
@@ -130,8 +130,8 @@ public class QueryClass {
 
     public static void main(String[] args) {
         Date date = new Date(2020, 2, 10);
-        QueryClass queryClass = new QueryClass();
-        System.out.println(queryClass.getMovieDateString(date));
+        QueryHandler queryHandler = new QueryHandler();
+        System.out.println(queryHandler.getMovieDateString(date));
 
 
     }
