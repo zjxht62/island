@@ -17,6 +17,8 @@ public class Constant {
             public static final String XINHUADAZHONGSI = "1589";
             public static final String SANLITUN = "136";
             public static final String DIZHILITANG= "261";
+            public static final String LUMIAI = "15773";
+
 
         }
 
@@ -31,6 +33,7 @@ public class Constant {
             public static final String XINHUADAZHONGSI = "新华国际影城(大钟寺店)";
             public static final String SANLITUN = "美嘉欢乐影城（三里屯店）";
             public static final String DIZHILITANG = "地质礼堂";
+            public static final String LUMIAI = "卢米埃影城（住总万科店）";
         }
 
     }

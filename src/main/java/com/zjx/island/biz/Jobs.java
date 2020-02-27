@@ -1,12 +1,12 @@
 package com.zjx.island.biz;
 
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaAllBoard;
-import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaBeijingBoard;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaData;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaDataCollector;
 import com.zjx.island.biz.islanddeal.IslandAutomation;
+import com.zjx.island.biz.moviequery.CinemaModel;
 import com.zjx.island.biz.moviequery.QueryClass;
-import com.zjx.island.biz.moviequery.QueryModel;
+import com.zjx.island.biz.moviequery.QueryTicketModel;
 import com.zjx.island.common.Constant;
 import com.zjx.island.model.OrderModel;
 import com.zjx.island.model.PersonModel;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -63,29 +64,20 @@ public class Jobs {
 
 
 //    @Scheduled(cron = "0 5 9,11,13,15,17,19,21,23 * * ?")
-//    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
+    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
     public void xidanMovieJob() {
         logger.info("开始执行查询");
-        QueryModel queryModel0 = new QueryModel("哪吒之魔童降世", "1211270",
-            Constant.CinemaConstants.CinemaName.WANGFUJING_APM, Constant.CinemaConstants.CinemaId.WANGFUJING_APM, 7, 27);
-        QueryModel queryModel1 = new QueryModel("哪吒之魔童降世", "1211270",
-            Constant.CinemaConstants.CinemaName.DONGFANGGUANGCHANG, Constant.CinemaConstants.CinemaId.DONGFANGGUANGCHANG, 7, 27);
-//        QueryModel queryModel2 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
-//            Constant.CinemaConstants.CinemaName.HENGDIAN, Constant.CinemaConstants.CinemaId.HENGDIAN, 7, 20);
-//        QueryModel queryModel3 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
-//            Constant.CinemaConstants.CinemaName.WANGFUJING_APM, Constant.CinemaConstants.CinemaId.WANGFUJING_APM, 7, 20);
-//        QueryModel queryModel4 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
-//            Constant.CinemaConstants.CinemaName.WANGFUJING_YAOLAI, Constant.CinemaConstants.CinemaId.WANGFUJING_YAOLAI, 7, 20);
-//        QueryModel queryModel5 = new QueryModel("命运之夜——天之杯II ：迷失之蝶", "414997",
-//            Constant.CinemaConstants.CinemaName.DIZHILITANG, Constant.CinemaConstants.CinemaId.DIZHILITANG, 7, 20);
+
+        List<CinemaModel> cinemaModelList = new ArrayList<>();
+        cinemaModelList.add(new CinemaModel(Constant.CinemaConstants.CinemaName.LUMIAI, Constant.CinemaConstants.CinemaId.LUMIAI));
+        cinemaModelList.add(new CinemaModel(Constant.CinemaConstants.CinemaName.LUMIAI, Constant.CinemaConstants.CinemaId.LUMIAI));
+
+        QueryTicketModel queryTicketModel0 = new QueryTicketModel("冰雪奇缘2", "247949", cinemaModelList, new Date(2020, 2, 1));
+
 
         QueryClass queryClass = new QueryClass();
-        queryClass.queryMovies(queryModel0);
-        queryClass.queryMovies(queryModel1);
-//        queryClass.queryMovies(queryModel2);
-//        queryClass.queryMovies(queryModel3);
-//        queryClass.queryMovies(queryModel4);
-//        queryClass.queryMovies(queryModel5);
+        queryClass.queryOneMovie(queryTicketModel0);
+
     }
 
 
@@ -98,7 +90,7 @@ public class Jobs {
         queryClass.queryBus(urls);
     }
 
-    @Scheduled(fixedDelay = 60 * ONE_MINUTE)
+//    @Scheduled(fixedDelay = 60 * ONE_MINUTE)
     public void pneumoniaJob() {
 
         PneumoniaData pneumoniaData = new PneumoniaData();
