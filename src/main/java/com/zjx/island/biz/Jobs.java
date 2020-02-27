@@ -113,11 +113,6 @@ public class Jobs {
         pneumoniaData.setBeijingNums(resultData.getBeijingNums());
         pneumoniaData.setAllStatus(resultData.getAllStatus());
         pneumoniaData.dataChanged();
-
-
-
-
-
     }
 
 

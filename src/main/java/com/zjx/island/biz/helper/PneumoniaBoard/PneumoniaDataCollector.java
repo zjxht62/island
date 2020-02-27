@@ -11,7 +11,7 @@ import com.zjx.island.utils.HTMLUtil;
  */
 public class PneumoniaDataCollector {
     private DataHandler handler;
-    public static final String URL = "https://3g.dxy.cn/newh5/view/pneumonia";
+    public static final String URL = "https://ncov.dxy.cn/ncovh5/view/pneumonia";
 
     public String collectHtmlData() {
         return HTMLUtil.getSource(URL);
