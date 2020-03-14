@@ -1,4 +1,4 @@
-package com.zjx.island.biz.helper.PneumoniaBoard;
+package com.zjx.island.biz.helper;
 
 /**
  * Demo class
@@ -6,7 +6,7 @@ package com.zjx.island.biz.helper.PneumoniaBoard;
  * @author trevor.zhao
  * @date 2020/1/22
  */
-public interface DataHandler {
+public interface HtmlDataHandler {
     Object handleData(String data);
 
 }

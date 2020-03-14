@@ -1,6 +1,7 @@
 package com.zjx.island.biz.helper.PneumoniaBoard;
 
 
+import com.zjx.island.biz.helper.HtmlDataHandler;
 import com.zjx.island.utils.HTMLUtil;
 
 /**
@@ -10,7 +11,7 @@ import com.zjx.island.utils.HTMLUtil;
  * @date 2020/1/22
  */
 public class PneumoniaDataCollector {
-    private DataHandler handler;
+    private HtmlDataHandler handler;
     public static final String URL = "https://ncov.dxy.cn/ncovh5/view/pneumonia";
 
     public String collectHtmlData() {
@@ -18,7 +19,7 @@ public class PneumoniaDataCollector {
     }
 
     public PneumoniaData getResult() {
-        handler = new PneumoniaHandler();
+        handler = new PneumoniaHtmlHandler();
         return (PneumoniaData) handler.handleData(collectHtmlData());
     }
 

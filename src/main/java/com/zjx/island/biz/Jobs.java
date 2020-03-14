@@ -3,6 +3,9 @@ package com.zjx.island.biz;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaAllBoard;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaData;
 import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaDataCollector;
+import com.zjx.island.biz.helper.kingdom.ResourceData;
+import com.zjx.island.biz.helper.kingdom.ResourceDataCollector;
+import com.zjx.island.biz.helper.kingdom.S02E01Observer;
 import com.zjx.island.biz.islanddeal.IslandAutomation;
 import com.zjx.island.biz.moviequery.Cinema;
 import com.zjx.island.biz.moviequery.QueryHandler;
@@ -61,24 +64,18 @@ public class Jobs {
     }
 
 
-//    @Scheduled(cron = "0 5 9,11,13,15,17,19,21,23 * * ?")
-    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
+//    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
     public void queryMovieJob() {
-
         //初始化要查询的影院list
         List<Cinema> cinemaList = new ArrayList<>();
         cinemaList.add(Cinema.LUMIAI);
-
         //初始化查询的model
         QueryTicketModel queryTicketModel0 = new QueryTicketModel("冰雪奇缘2", "247949", cinemaList, new Date(2020, 2, 1));
-
         //新建查询处理器
         QueryHandler queryHandler = new QueryHandler();
-
         //执行查询
         logger.info("开始执行查询");
         queryHandler.queryOneMovie(queryTicketModel0);
-
     }
 
 

@@ -129,11 +129,8 @@ public class QueryHandler {
     }
 
     public static void main(String[] args) {
-        Date date = new Date(2020, 2, 10);
         QueryHandler queryHandler = new QueryHandler();
-        System.out.println(queryHandler.getMovieDateString(date));
-
-
+        queryHandler.sendNotification("测试一下 请忽略", "https://oapi.dingtalk.com/robot/send?access_token=417e4fa249be90a788ff6e88f33b543b12d00b6c1c29cc72e9367d2306ffc70e");
     }
 
 //    public Document getDocument(String url) {

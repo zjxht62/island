@@ -1,12 +1,10 @@
 package com.zjx.island.biz.helper.PneumoniaBoard;
 
+import com.zjx.island.biz.helper.HtmlDataHandler;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
-import java.net.URI;
-
 import static com.zjx.island.utils.HTMLUtil.getDocument;
-import static com.zjx.island.utils.HTMLUtil.getSource;
 
 /**
  * Demo class
@@ -14,7 +12,7 @@ import static com.zjx.island.utils.HTMLUtil.getSource;
  * @author trevor.zhao
  * @date 2020/1/22
  */
-public class PneumoniaHandler implements DataHandler {
+public class PneumoniaHtmlHandler implements HtmlDataHandler {
     @Override
     public PneumoniaData handleData(String data) {
         PneumoniaData pneumoniaData = new PneumoniaData();
