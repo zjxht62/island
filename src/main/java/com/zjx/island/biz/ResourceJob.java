@@ -48,7 +48,7 @@ public class ResourceJob {
         S02E06Observer s02E06Observer = new S02E06Observer(resourceData);
     }
 
-    @Scheduled(fixedDelay = 10* 1000)
+//    @Scheduled(fixedDelay = 10* 1000)
 //    @Scheduled(fixedDelay = 1 * ONE_MINUTE)
     public void kingdomJob() {
 
