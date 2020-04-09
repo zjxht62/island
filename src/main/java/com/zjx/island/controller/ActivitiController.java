@@ -5,7 +5,10 @@ import com.zjx.island.biz.activiti.examples.CallRequest;
 import com.zjx.island.biz.activiti.examples.Content;
 import com.zjx.island.biz.activiti.examples.Headers;
 import com.zjx.island.biz.activiti.examples.SecurityUtil;
+import com.zjx.island.biz.activiti.examples.model.ProcessInstanceReqModel;
+import com.zjx.island.biz.activiti.examples.model.TaskQueryReqModel;
 import io.swagger.annotations.Api;
+import io.swagger.models.HttpMethod;
 import org.activiti.api.model.shared.model.VariableInstance;
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.ProcessInstance;
@@ -15,15 +18,25 @@ import org.activiti.api.process.runtime.connector.Connector;
 import org.activiti.api.runtime.shared.query.Page;
 import org.activiti.api.runtime.shared.query.Pageable;
 import org.activiti.api.task.model.Task;
+import org.activiti.api.task.model.builders.ClaimTaskPayloadBuilder;
 import org.activiti.api.task.model.builders.TaskPayloadBuilder;
+import org.activiti.api.task.model.payloads.CreateTaskVariablePayload;
+import org.activiti.api.task.model.payloads.SaveTaskPayload;
+import org.activiti.api.task.model.payloads.UpdateTaskPayload;
 import org.activiti.api.task.runtime.TaskRuntime;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.history.HistoricTaskInstanceQuery;
+import org.apache.http.protocol.HTTP;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.ServiceUI;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -50,6 +63,11 @@ public class ActivitiController {
     @Autowired
     private TaskRuntime taskRuntime;
 
+    @Autowired
+    private HistoryService historyService;
+
+    private static final String PROCESS_ID = "trustOperation";
+
     @RequestMapping(value = "/getAllpProgress", method = RequestMethod.GET)
     @ResponseBody
     public void getAllProcesses() {
@@ -61,33 +79,40 @@ public class ActivitiController {
         }
     }
 
-    @RequestMapping(value = "/newProcessInstance")
+    @RequestMapping(value = "/newProcessInstance", method = RequestMethod.POST)
     @ResponseBody
-    public void processANewInstance() {
+    public void processANewInstance(@RequestBody ProcessInstanceReqModel processInstanceReqModel) {
         securityUtil.logInAs("system");
 
-        Content content = pickRandomString();
-        Headers headers = new Headers("contentType", "application/json");
-        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", false, headers);
+//        Content content = pickRandomString();
+//        content.setBody("Hi there from activiti!");
+//        Headers headers = new Headers("contentType", "application/json");
+//        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", false, headers);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 
-        LOGGER.info("> 开始新建ProcessInstance: " + content + " at " + formatter.format(new Date()));
+        LOGGER.info("> 开始新建ProcessInstance,名为: " + processInstanceReqModel.getName() + " at " + formatter.format(new Date()));
 
         ProcessInstance processInstance = processRuntime.start(ProcessPayloadBuilder
             .start()
-            .withProcessDefinitionKey("categorizeHumanProcess")
-            .withName("Processing Content: " + content)
-            .withVariable("content", content)
-            .withVariable("callRequest", callRequest)
+            .withProcessDefinitionKey(processInstanceReqModel.getProcessId())
+            .withName(processInstanceReqModel.getName())
+            .withBusinessKey(processInstanceReqModel.getName())
+//            .withVariable("content", content)
+//            .withVariable("callRequest", callRequest)
             .build());
         LOGGER.info(">>> 创建流程实例: " + processInstance);
     }
 
-    @RequestMapping(value = "/getAllMyTasks", method = RequestMethod.GET)
+    /**
+     * 获取所有我可以执行的任务
+     * @param userName
+     * @return
+     */
+    @RequestMapping(value = "/getAllMyTasks/{userName}", method = RequestMethod.GET)
     @ResponseBody
-    public String getAllMyTasks() {
-        securityUtil.logInAs("webb");
+    public String getAllMyTasks(@PathVariable("userName") String userName) {
+        securityUtil.logInAs(userName);
         Page<Task> tasks = taskRuntime.tasks(Pageable.of(0, 10));
         if (tasks.getTotalItems() > 0) {
             return JSON.toJSONString(tasks.getContent());
@@ -97,11 +122,26 @@ public class ActivitiController {
     }
 
 
-    @RequestMapping(value = "/checkAndWorkOnTasksWhenAvailable")
+    @RequestMapping(value = "/claimTaskById/{userName}/{taskId}", method = RequestMethod.GET)
     @ResponseBody
-    public void checkAndWorkOnTasksWhenAvailable() {
+    public String claimTaskById(@PathVariable("userName") String userName, @PathVariable("taskId") String taskId) {
+        securityUtil.logInAs(userName);
+        taskRuntime.claim(TaskPayloadBuilder.claim().withTaskId(taskId).build();
+        LOGGER.info("领取ID为:" + taskId + "的任务");
+        Headers headers = new Headers("contentType", "application/json");
+        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", false, headers);
+        taskRuntime.createVariable(TaskPayloadBuilder.createVariable().withTaskId(taskId).withVariable("callRequest", callRequest).build());
+        return JSON.toJSONString(taskRuntime.task(taskId).toString());
+
+
+    }
+
+
+    @RequestMapping(value = "/checkAndWorkOnTasksWhenAvailable/{userName}", method = RequestMethod.GET)
+    @ResponseBody
+    public void checkAndWorkOnTasksWhenAvailable(@PathVariable("userName") String userName) {
 //        securityUtil.logInAs("system");
-        securityUtil.logInAs("webb");
+        securityUtil.logInAs(userName);
 
         Page<Task> tasks = taskRuntime.tasks(Pageable.of(0, 10));
         if (tasks.getTotalItems() > 0) {
@@ -147,7 +187,40 @@ public class ActivitiController {
 
     }
 
+    @RequestMapping(value = "/history", method = RequestMethod.POST)
+    @ResponseBody
+    public void getTaskHistory(@RequestBody TaskQueryReqModel taskQueryReqModel) {
+        System.out.println("获取历史");
+        HistoricTaskInstanceQuery historicTaskInstanceQuery = historyService.createHistoricTaskInstanceQuery();
+        historicTaskInstanceQuery.processDefinitionKey(taskQueryReqModel.getProcessId());
+        if (taskQueryReqModel.isFinished()) {
+            historicTaskInstanceQuery.finished();
+        } else {
+            historicTaskInstanceQuery.unfinished();
+        }
+        List<HistoricTaskInstance> historicTaskInstanceList = historicTaskInstanceQuery.list();
+        int count = 0;
+        for (HistoricTaskInstance taskInstance : historicTaskInstanceList) {
+            LOGGER.info("结果：" + count);
+            LOGGER.info("pid:" + taskInstance.getId()+",");
+            LOGGER.info("pdid:" + taskInstance.getProcessDefinitionId()+",");
+            LOGGER.info("startTime:" + taskInstance.getStartTime()+",");
+            LOGGER.info("endTime:" + taskInstance.getEndTime()+",");
+            LOGGER.info("owner:" + taskInstance.getOwner()+",");
+            LOGGER.info("assignee:" + taskInstance.getAssignee());
+            LOGGER.info("vars:" + taskInstance.getProcessVariables());
+            count++;
+        }
 
+    }
+
+
+
+
+    /**
+     * 在bpmn内进行定义
+     * @return
+     */
     @Bean
     public Connector tagTextConnector() {
         return integrationContext -> {
@@ -162,6 +235,19 @@ public class ActivitiController {
 
     @Bean
     public Connector discardTextConnector() {
+        return integrationContext -> {
+            Content contentToDiscard = (Content) integrationContext.getInBoundVariables().get("content");
+            contentToDiscard.getTags().add(" :( ");
+            integrationContext.addOutBoundVariable("content",
+                contentToDiscard);
+            LOGGER.info("最终内容: " + contentToDiscard);
+            return integrationContext;
+        };
+    }
+
+
+    @Bean
+    public Connector myConnector() {
         return integrationContext -> {
             Content contentToDiscard = (Content) integrationContext.getInBoundVariables().get("content");
             contentToDiscard.getTags().add(" :( ");

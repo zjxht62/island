@@ -40,7 +40,7 @@
       <bpmn:outgoing>SequenceFlow_1jzbgkj</bpmn:outgoing>
       <bpmn:potentialOwner>
         <bpmn:resourceAssignmentExpression>
-          <bpmn:formalExpression>qecTeam</bpmn:formalExpression>
+          <bpmn:formalExpression>qecLederTeam</bpmn:formalExpression>
         </bpmn:resourceAssignmentExpression>
       </bpmn:potentialOwner>
     </bpmn:userTask>

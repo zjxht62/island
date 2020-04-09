@@ -29,7 +29,7 @@ public class DemoApplicationConfiguration {
                 {"salaboy", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
                 {"ryandawsonuk", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
                 {"erdemedeiros", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
-                {"webb", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
+                {"webb", "password", "ROLE_ACTIVITI_USER", "GROUP_qecLederTeam"},
                 {"other", "password", "ROLE_ACTIVITI_USER", "GROUP_otherTeam"},
                 {"system", "password", "ROLE_ACTIVITI_USER"},
                 {"admin", "password", "ROLE_ACTIVITI_ADMIN"},
