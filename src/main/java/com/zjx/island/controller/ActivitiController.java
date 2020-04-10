@@ -82,12 +82,10 @@ public class ActivitiController {
     @RequestMapping(value = "/newProcessInstance", method = RequestMethod.POST)
     @ResponseBody
     public void processANewInstance(@RequestBody ProcessInstanceReqModel processInstanceReqModel) {
-        securityUtil.logInAs("system");
+        securityUtil.logInAs("trevor");
 
-//        Content content = pickRandomString();
-//        content.setBody("Hi there from activiti!");
-//        Headers headers = new Headers("contentType", "application/json");
-//        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", false, headers);
+        Headers headers = new Headers("contentType", "application/json");
+        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", headers);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 
@@ -98,8 +96,8 @@ public class ActivitiController {
             .withProcessDefinitionKey(processInstanceReqModel.getProcessId())
             .withName(processInstanceReqModel.getName())
             .withBusinessKey(processInstanceReqModel.getName())
-//            .withVariable("content", content)
-//            .withVariable("callRequest", callRequest)
+            .withVariable("approved", false)
+            .withVariable("callRequest", callRequest)
             .build());
         LOGGER.info(">>> 创建流程实例: " + processInstance);
     }
@@ -126,15 +124,58 @@ public class ActivitiController {
     @ResponseBody
     public String claimTaskById(@PathVariable("userName") String userName, @PathVariable("taskId") String taskId) {
         securityUtil.logInAs(userName);
-        taskRuntime.claim(TaskPayloadBuilder.claim().withTaskId(taskId).build();
+        taskRuntime.claim(TaskPayloadBuilder.claim().withTaskId(taskId).build());
         LOGGER.info("领取ID为:" + taskId + "的任务");
-        Headers headers = new Headers("contentType", "application/json");
-        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", false, headers);
-        taskRuntime.createVariable(TaskPayloadBuilder.createVariable().withTaskId(taskId).withVariable("callRequest", callRequest).build());
         return JSON.toJSONString(taskRuntime.task(taskId).toString());
+    }
+
+    @RequestMapping(value = "/releaseTaskById/{userName}/{taskId}", method = RequestMethod.GET)
+    @ResponseBody
+    public String releaseTaskById(@PathVariable("userName") String userName, @PathVariable("taskId") String taskId) {
+        securityUtil.logInAs(userName);
+        taskRuntime.release(TaskPayloadBuilder.release().withTaskId(taskId).build());
+        LOGGER.info("释放ID为:" + taskId + "的任务");
+        return JSON.toJSONString(taskRuntime.task(taskId).toString());
+    }
+
+    @RequestMapping(value = "/getTaskParams/{taskId}", method = RequestMethod.GET)
+    @ResponseBody
+    public String getTaskParams(@PathVariable("taskId") String taskId) {
+        securityUtil.logInAs("webb");
+        CallRequest result = null;
+
+        List<VariableInstance> variables = taskRuntime.variables(TaskPayloadBuilder.variables().withTaskId(taskId).build());
+        Iterator<VariableInstance> iterator = variables.iterator();
+        while (iterator.hasNext()) {
+            VariableInstance variableInstance = iterator.next();
+            LOGGER.info("> 所有的变量有: " + variableInstance.getName());
+            if (variableInstance.getName().equals("initiator")) {
+                LOGGER.info("> initiator初始化的人是:" + variableInstance.getValue());
+            }
+            else if (variableInstance.getName().equals("callRequest")) {
+                result = variableInstance.getValue();
+                LOGGER.info("> 任务中收到的要调用的接口信息: " + result);
+                LOGGER.info("> 调用接口请求url：" + result.getUrl());
+                LOGGER.info("> 调用接口请求body：" + result.getBody());
+                LOGGER.info("> 请求头：" + result.getHeaders());
+            }
+        }
+
+        return JSON.toJSONString(result);
 
 
     }
+
+    @RequestMapping(value = "/completeTaskById/{userName}/{taskId}", method = RequestMethod.GET)
+    @ResponseBody
+    public String completeTaskById(@PathVariable("userName") String userName, @PathVariable("taskId") String taskId) {
+        securityUtil.logInAs(userName);
+//        taskRuntime.updateVariable(TaskPayloadBuilder.updateVariable().withTaskId(taskId).withVariable("approved", true).build());
+        taskRuntime.complete(TaskPayloadBuilder.complete().withTaskId(taskId).withVariable("approved", true).build());
+        LOGGER.info("完成ID为:" + taskId + "的任务");
+        return "完成了任务";
+    }
+
 
 
     @RequestMapping(value = "/checkAndWorkOnTasksWhenAvailable/{userName}", method = RequestMethod.GET)
@@ -217,43 +258,43 @@ public class ActivitiController {
 
 
 
-    /**
-     * 在bpmn内进行定义
-     * @return
-     */
-    @Bean
-    public Connector tagTextConnector() {
-        return integrationContext -> {
-            Content contentToTag = (Content) integrationContext.getInBoundVariables().get("content");
-            contentToTag.getTags().add(" :) ");
-            integrationContext.addOutBoundVariable("content",
-                contentToTag);
-            LOGGER.info("最终内容: " + contentToTag);
-            return integrationContext;
-        };
-    }
+//    /**
+//     * 在bpmn内进行定义
+//     * @return
+//     */
+//    @Bean
+//    public Connector tagTextConnector() {
+//        return integrationContext -> {
+//            Content contentToTag = (Content) integrationContext.getInBoundVariables().get("content");
+//            contentToTag.getTags().add(" :) ");
+//            integrationContext.addOutBoundVariable("content",
+//                contentToTag);
+//            LOGGER.info("最终内容: " + contentToTag);
+//            return integrationContext;
+//        };
+//    }
 
-    @Bean
-    public Connector discardTextConnector() {
-        return integrationContext -> {
-            Content contentToDiscard = (Content) integrationContext.getInBoundVariables().get("content");
-            contentToDiscard.getTags().add(" :( ");
-            integrationContext.addOutBoundVariable("content",
-                contentToDiscard);
-            LOGGER.info("最终内容: " + contentToDiscard);
-            return integrationContext;
-        };
-    }
+//    @Bean
+//    public Connector discardTextConnector() {
+//        return integrationContext -> {
+//            Content contentToDiscard = (Content) integrationContext.getInBoundVariables().get("content");
+//            contentToDiscard.getTags().add(" :( ");
+//            integrationContext.addOutBoundVariable("content",
+//                contentToDiscard);
+//            LOGGER.info("最终内容: " + contentToDiscard);
+//            return integrationContext;
+//        };
+//    }
 
 
     @Bean
     public Connector myConnector() {
         return integrationContext -> {
-            Content contentToDiscard = (Content) integrationContext.getInBoundVariables().get("content");
-            contentToDiscard.getTags().add(" :( ");
-            integrationContext.addOutBoundVariable("content",
-                contentToDiscard);
-            LOGGER.info("最终内容: " + contentToDiscard);
+            CallRequest callRequestToDiscard = (CallRequest) integrationContext.getInBoundVariables().get("callRequest");
+            callRequestToDiscard.setBody("执行调用body的serviceTask");
+            integrationContext.addOutBoundVariable("callRequest",
+                callRequestToDiscard);
+            LOGGER.info("调用接口: " + callRequestToDiscard);
             return integrationContext;
         };
     }

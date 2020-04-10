@@ -27,6 +27,7 @@ public class DemoApplicationConfiguration {
 
         String[][] usersGroupsAndRoles = {
                 {"salaboy", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
+                {"trevor", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
                 {"ryandawsonuk", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
                 {"erdemedeiros", "password", "ROLE_ACTIVITI_USER", "GROUP_qecTeam"},
                 {"webb", "password", "ROLE_ACTIVITI_USER", "GROUP_qecLederTeam"},

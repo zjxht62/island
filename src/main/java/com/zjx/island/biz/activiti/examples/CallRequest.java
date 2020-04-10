@@ -14,14 +14,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public class CallRequest {
     private String url;
     private String body;
-    private boolean approved;
     private Headers headers;
 
     @JsonCreator
-    public CallRequest(@JsonProperty("url") String url, @JsonProperty("body") String body, @JsonProperty("approved") boolean approved, @JsonProperty("headers") Headers headers) {
+    public CallRequest(@JsonProperty("url") String url, @JsonProperty("body") String body,  @JsonProperty("headers") Headers headers) {
         this.url = url;
         this.body = body;
-        this.approved = approved;
         this.headers = headers;
     }
 
@@ -41,13 +39,6 @@ public class CallRequest {
         this.body = body;
     }
 
-    public boolean isApproved() {
-        return approved;
-    }
-
-    public void setApproved(boolean approved) {
-        this.approved = approved;
-    }
 
     public Headers getHeaders() {
         return headers;
@@ -62,7 +53,6 @@ public class CallRequest {
         return "CallRequest{" +
             "url='" + url + '\'' +
             ", body='" + body + '\'' +
-            ", approved=" + approved +
             ", headers=" + headers +
             '}';
     }
