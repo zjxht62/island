@@ -138,10 +138,10 @@ public class ActivitiController {
         return JSON.toJSONString(taskRuntime.task(taskId).toString());
     }
 
-    @RequestMapping(value = "/getTaskParams/{taskId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/getTaskParams/{userName}/{taskId}", method = RequestMethod.GET)
     @ResponseBody
-    public String getTaskParams(@PathVariable("taskId") String taskId) {
-        securityUtil.logInAs("webb");
+    public String getTaskParams(@PathVariable("userName") String userName, @PathVariable("taskId") String taskId) {
+        securityUtil.logInAs(userName);
         CallRequest result = null;
 
         List<VariableInstance> variables = taskRuntime.variables(TaskPayloadBuilder.variables().withTaskId(taskId).build());
@@ -257,34 +257,6 @@ public class ActivitiController {
 
 
 
-
-//    /**
-//     * 在bpmn内进行定义
-//     * @return
-//     */
-//    @Bean
-//    public Connector tagTextConnector() {
-//        return integrationContext -> {
-//            Content contentToTag = (Content) integrationContext.getInBoundVariables().get("content");
-//            contentToTag.getTags().add(" :) ");
-//            integrationContext.addOutBoundVariable("content",
-//                contentToTag);
-//            LOGGER.info("最终内容: " + contentToTag);
-//            return integrationContext;
-//        };
-//    }
-
-//    @Bean
-//    public Connector discardTextConnector() {
-//        return integrationContext -> {
-//            Content contentToDiscard = (Content) integrationContext.getInBoundVariables().get("content");
-//            contentToDiscard.getTags().add(" :( ");
-//            integrationContext.addOutBoundVariable("content",
-//                contentToDiscard);
-//            LOGGER.info("最终内容: " + contentToDiscard);
-//            return integrationContext;
-//        };
-//    }
 
 
     @Bean

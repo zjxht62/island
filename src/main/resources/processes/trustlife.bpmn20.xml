@@ -4,42 +4,27 @@
     <startEvent activiti:initiator="initiator" id="theStart"/>
     <sequenceFlow id="flow1" sourceRef="theStart" targetRef="verifyTask"/>
     <userTask activiti:exclusive="true" id="verifyTask" name="Verify the parameters">
-      <documentation id="verifyTask_D_1">
-        <![CDATA[
-        ]]>
-      </documentation>
       <potentialOwner>
         <resourceAssignmentExpression>
           <formalExpression>qecLederTeam</formalExpression>
         </resourceAssignmentExpression>
       </potentialOwner>
     </userTask>
-    <endEvent id="theEnd">
-      <terminateEventDefinition id="theEnd_ED_1"/>
+    <userTask activiti:exclusive="true" id="executeTask" name="Execute the request">
+      <potentialOwner>
+        <resourceAssignmentExpression>
+          <formalExpression>qecTeam</formalExpression>
+        </resourceAssignmentExpression>
+      </potentialOwner>
+    </userTask>
+    <sequenceFlow id="_5" sourceRef="verifyTask" targetRef="executeTask"/>
+    <endEvent id="_6" name="EndEvent">
+      <terminateEventDefinition id="_6_ED_1"/>
     </endEvent>
-    <serviceTask activiti:exclusive="true" id="serviceTask" implementation="myConnector" name="ServiceTask"/>
-    <exclusiveGateway gatewayDirection="Unspecified" id="ExclusiveGateway" name="ExclusiveGateway"/>
-    <sequenceFlow id="_5" sourceRef="verifyTask" targetRef="ExclusiveGateway"/>
-    <sequenceFlow id="_6" sourceRef="ExclusiveGateway" targetRef="serviceTask" name="yes">
-      <conditionExpression>${approved == true}</conditionExpression>
-    </sequenceFlow>
-    <sequenceFlow id="_7" sourceRef="serviceTask" targetRef="theEnd"/>
-
-    <endEvent id="_2" name="EndEvent">
-      <terminateEventDefinition id="_2_ED_1"/>
-    </endEvent>
-    <sequenceFlow id="_4" name="no" sourceRef="ExclusiveGateway" targetRef="_2">
-      <conditionExpression>${approved == false}</conditionExpression>
-    </sequenceFlow>
+    <sequenceFlow id="_7" sourceRef="executeTask" targetRef="_6"/>
   </process>
   <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
     <bpmndi:BPMNPlane bpmnElement="trustOperation">
-      <bpmndi:BPMNShape bpmnElement="theEnd" id="Shape-theEnd">
-        <dc:Bounds height="32.0" width="32.0" x="795.0" y="270.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="verifyTask" id="Shape-verifyTask">
         <dc:Bounds height="55.0" width="85.0" x="255.0" y="195.5"/>
         <bpmndi:BPMNLabel>
@@ -52,20 +37,14 @@
           <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="serviceTask" id="Shape-serviceTask">
-        <dc:Bounds height="55.0" width="85.0" x="460.0" y="355.0"/>
+      <bpmndi:BPMNShape bpmnElement="executeTask" id="Shape-executeTask">
+        <dc:Bounds height="55.0" width="85.0" x="410.0" y="195.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="ExclusiveGateway" id="Shape-ExclusiveGateway" isMarkerVisible="false">
-        <dc:Bounds height="32.0" width="32.0" x="400.0" y="205.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="_2" id="Shape-_2">
-        <dc:Bounds height="32.0" width="32.0" x="500.0" y="35.0"/>
+      <bpmndi:BPMNShape bpmnElement="_6" id="Shape-_6">
+        <dc:Bounds height="32.0" width="32.0" x="630.0" y="220.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
@@ -77,30 +56,16 @@
           <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_4" id="BPMNEdge__4" sourceElement="ExclusiveGateway" targetElement="_2">
-        <di:waypoint x="432.0" y="221.0"/>
-        <di:waypoint x="500.0" y="51.0"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_5" id="BPMNEdge__5" sourceElement="verifyTask" targetElement="ExclusiveGateway">
+      <bpmndi:BPMNEdge bpmnElement="_5" id="BPMNEdge__5" sourceElement="verifyTask" targetElement="_4">
         <di:waypoint x="340.0" y="223.0"/>
-        <di:waypoint x="400.0" y="221.0"/>
+        <di:waypoint x="410.0" y="222.5"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="ExclusiveGateway" targetElement="serviceTask">
-        <di:waypoint x="432.0" y="221.0"/>
-        <di:waypoint x="460.0" y="382.5"/>
-        <bpmndi:BPMNLabel>
-          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="serviceTask" targetElement="theEnd">
-        <di:waypoint x="545.0" y="382.5"/>
-        <di:waypoint x="795.0" y="286.0"/>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="_4" targetElement="_6">
+        <di:waypoint x="495.0" y="222.5"/>
+        <di:waypoint x="630.0" y="236.0"/>
         <bpmndi:BPMNLabel>
           <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
         </bpmndi:BPMNLabel>
