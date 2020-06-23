@@ -39,9 +39,8 @@ public class Jobs {
 
 //    @Scheduled(fixedDelay = 1000)
     public void fixedDelayJob() {
-        PersonModel personzjx = new PersonModel("赵吉祥", "110107199409080613", "13241336315");
-//        PersonModel personzjx2 = new PersonModel("赵吉祥", "110107199409080613", "13241336315");
-        PersonModel personckx = new PersonModel("程可欣", "11010219940901194X", "13269417087");
+        PersonModel personzjx = new PersonModel("", "", "");
+        PersonModel personckx = new PersonModel("", "", "");
         List<PersonModel> personModels = new ArrayList<>();
         personModels.add(personzjx);
         personModels.add(personckx);
