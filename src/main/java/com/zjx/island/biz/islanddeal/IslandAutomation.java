@@ -68,6 +68,6 @@ public class IslandAutomation {
     }
 
     public static void main(String[] args) {
-        deal(new PersonModel("赵吉祥", "110107199409080613", "13241336315"));
+        deal(new PersonModel("", "", ""));
     }
 }
