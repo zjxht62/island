@@ -85,7 +85,7 @@ public class ActivitiController {
         securityUtil.logInAs("trevor");
 
         Headers headers = new Headers("contentType", "application/json");
-        CallRequest callRequest = new CallRequest("www.trustlife.com", "{empty}", headers);
+        CallRequest callRequest = new CallRequest("www.haha.com", "{empty}", headers);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 

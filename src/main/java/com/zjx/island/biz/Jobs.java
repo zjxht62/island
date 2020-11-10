@@ -58,7 +58,7 @@ public class Jobs {
                 IslandAutomation.deal(personModels.get(i));
             }
             hasOrdered = true;
-//            EmailUtil.send("trevor.zhao@trustlife.com", orderModel.getAviliableString() + "当前时间" + df.format(new Date()), false,"晓岛目前可以预约啦");
+//            EmailUtil.send("", orderModel.getAviliableString() + "当前时间" + df.format(new Date()), false,"晓岛目前可以预约啦");
         }
     }
 
