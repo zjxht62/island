@@ -81,10 +81,10 @@ public class MybatisFirstTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
         User user = new User();
-        user.setUsername("赵吉祥");
+        user.setUsername("");
         user.setBirthday(new Date());
         user.setSex("1");
-        user.setAddress("北京石景山");
+        user.setAddress("");
 
         sqlSession.insert("test.insertUser", user);
 

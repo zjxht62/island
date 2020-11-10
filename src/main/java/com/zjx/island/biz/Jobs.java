@@ -63,13 +63,14 @@ public class Jobs {
     }
 
 
-//    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
+    @Scheduled(fixedDelay = 5 * ONE_MINUTE)
     public void queryMovieJob() {
         //初始化要查询的影院list
         List<Cinema> cinemaList = new ArrayList<>();
-        cinemaList.add(Cinema.LUMIAI);
+//        cinemaList.add(Cinema.LUMIAI);
+        cinemaList.add(Cinema.HENGDIAN);
         //初始化查询的model
-        QueryTicketModel queryTicketModel0 = new QueryTicketModel("冰雪奇缘2", "247949", cinemaList, new Date(2020, 2, 1));
+        QueryTicketModel queryTicketModel0 = new QueryTicketModel("信条", "1297973", cinemaList, new Date(2020, 8, 12));
         //新建查询处理器
         QueryHandler queryHandler = new QueryHandler();
         //执行查询

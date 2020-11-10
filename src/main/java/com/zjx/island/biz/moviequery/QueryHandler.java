@@ -53,7 +53,8 @@ public class QueryHandler {
         StringBuilder stringBuilder = new StringBuilder();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         for (Cinema cinema : queryTicketModel.getCinemaModelList()) {
-            Document document = getDocument(getSource("https://maoyan.com/cinema/" + cinema.getCinemaId() + "?poi=283722&movieId=" + queryTicketModel.getMovieId()));
+            Document document = getDocument(getSource("https://maoyan.com/cinema/" + cinema.getCinemaId() + "?poi=1549949&movieId=" + queryTicketModel.getMovieId()));
+            logger.info("请求返回的document:" + document);
             Elements elements = document.select(".show-list");
             stringBuilder.append("ฅ՞•ﻌ•՞ฅ 任务执行~喵~\n" + "影院名称喵~\n" + "        " + cinema.getCinemaName() + "\n" + "想看的电影喵~\n" + "        " + queryTicketModel.getMovieName() + "\n日期喵~\n");
             for (Element element : elements) {

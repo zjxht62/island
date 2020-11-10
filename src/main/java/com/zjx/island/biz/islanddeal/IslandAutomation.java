@@ -68,6 +68,10 @@ public class IslandAutomation {
     }
 
     public static void main(String[] args) {
-        deal(new PersonModel("", "", ""));
+        BaseAutomation islandTest = new BaseAutomation();
+        islandTest.beforeMethod();
+        islandTest.getPage("https://maoyan.com/cinema/149?poi=1549949&movieId=1297973");
+        WebDriver webDriver = islandTest.getDriver();
+        System.out.println(webDriver.getPageSource());
     }
 }

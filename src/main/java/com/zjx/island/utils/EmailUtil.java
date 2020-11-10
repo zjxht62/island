@@ -21,10 +21,10 @@ public class EmailUtil {
         String to = sendTo;
 
         // 发件人电子邮箱
-        String from = "SLA@trustlife.com";
+        String from = "";
 
         // 指定发送邮件的主机为 smtp.qq.com
-        String host = "smtp.trustlife.com";  //QQ 邮件服务器
+        String host = "";  //QQ 邮件服务器
 
         // 获取系统属性
         Properties properties = System.getProperties();
@@ -36,7 +36,7 @@ public class EmailUtil {
         // 获取默认session对象
         Session session = Session.getDefaultInstance(properties, new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("SLA@trustlife.com", "A906a906"); //发件人邮件用户名、密码
+                return new PasswordAuthentication("", ""); //发件人邮件用户名、密码
             }
         });
 

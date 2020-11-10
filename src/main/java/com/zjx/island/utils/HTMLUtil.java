@@ -85,15 +85,8 @@ public class HTMLUtil {
 
     public static void main(String[] args) {
 
-        StringBuilder stringBuilder = new StringBuilder();
-        Document document = Jsoup.parse(getSource("https://ncov.dxy.cn/ncovh5/view/pneumonia"));
-        System.out.println(document.body());
-        Elements dataLiList = document.select(".bigNumberPannel___3jtOw hasCardBg___1TA1g");
-        for (Element e : dataLiList) {
-            System.out.println(e.html());
+        System.out.println(getSource("https://maoyan.com/cinema/79?poi=1549949&movieId=1297973"));
 
-
-        }
 //        System.out.println(elements);
 //        System.out.println(document.select(".show-list .movie-name:contains(掠食城市)"));
 

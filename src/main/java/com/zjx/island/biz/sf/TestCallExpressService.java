@@ -68,9 +68,9 @@ public class TestCallExpressService {
         //丰桥平台公共测试账号
         //SLKJ2019
         //FBIqMkZjzxbsZgo7jTpeq7PD8CVzLT4Q
-        String reqURL="https://bsp-oisp.sf-express.com/bsp-oisp/sfexpressService";
-        String clientCode="ZJX_I4NBa";//此处替换为您在丰桥平台获取的顾客编码
-        String checkword="raYXF5zLeNeXfyMIRf7LG3NXsxVkjoGb";//此处替换为您在丰桥平台获取的校验码
+        String reqURL="";
+        String clientCode="";//此处替换为您在丰桥平台获取的顾客编码
+        String checkword="";//此处替换为您在丰桥平台获取的校验码
         CallExpressServiceTools client=CallExpressServiceTools.getInstance();
         String myReqXML=reqXml.replace("SLKJ2019",clientCode);
         System.out.println("请求报文："+myReqXML);
