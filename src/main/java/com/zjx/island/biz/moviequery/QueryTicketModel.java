@@ -29,18 +29,19 @@ public class QueryTicketModel {
     /**
      * 观影日期
      */
-    private Date movieDate;
+
+    private QueryDate queryDate;
 
 
     public QueryTicketModel() {
 
     }
 
-    public QueryTicketModel(String movieName, String movieId, List<Cinema> cinemaModelList, Date movieDate) {
+    public QueryTicketModel(String movieName, String movieId, List<Cinema> cinemaModelList, QueryDate queryDate) {
         this.movieName = movieName;
         this.movieId = movieId;
         this.cinemaModelList = cinemaModelList;
-        this.movieDate = movieDate;
+        this.queryDate = queryDate;
     }
 
     public String getMovieName() {
@@ -67,12 +68,12 @@ public class QueryTicketModel {
         this.cinemaModelList = cinemaModelList;
     }
 
-    public Date getMovieDate() {
-        return movieDate;
+    public QueryDate getQueryDate() {
+        return queryDate;
     }
 
-    public void setMovieDate(Date movieDate) {
-        this.movieDate = movieDate;
+    public void setQueryDate(QueryDate queryDate) {
+        this.queryDate = queryDate;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class QueryTicketModel {
             "movieName='" + movieName + '\'' +
             ", movieId='" + movieId + '\'' +
             ", cinemaModelList=" + cinemaModelList +
-            ", movieDate=" + movieDate +
+            ", queryDate=" + queryDate +
             '}';
     }
 

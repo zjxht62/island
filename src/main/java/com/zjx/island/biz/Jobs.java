@@ -8,6 +8,7 @@ import com.zjx.island.biz.helper.kingdom.ResourceDataCollector;
 import com.zjx.island.biz.helper.kingdom.S02E01Observer;
 import com.zjx.island.biz.islanddeal.IslandAutomation;
 import com.zjx.island.biz.moviequery.Cinema;
+import com.zjx.island.biz.moviequery.QueryDate;
 import com.zjx.island.biz.moviequery.QueryHandler;
 import com.zjx.island.biz.moviequery.QueryTicketModel;
 import com.zjx.island.model.OrderModel;
@@ -68,9 +69,9 @@ public class Jobs {
         //初始化要查询的影院list
         List<Cinema> cinemaList = new ArrayList<>();
 //        cinemaList.add(Cinema.LUMIAI);
-        cinemaList.add(Cinema.HENGDIAN);
+        cinemaList.add(Cinema.WANGFUJING_APM);
         //初始化查询的model
-        QueryTicketModel queryTicketModel0 = new QueryTicketModel("信条", "1297973", cinemaList, new Date(2020, 8, 12));
+        QueryTicketModel queryTicketModel0 = new QueryTicketModel("除暴", "1240838", cinemaList, new QueryDate(2020, 11, 20));
         //新建查询处理器
         QueryHandler queryHandler = new QueryHandler();
         //执行查询

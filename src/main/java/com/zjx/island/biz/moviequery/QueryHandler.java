@@ -46,14 +46,16 @@ public class QueryHandler {
     }
 
 
+
+
     public void queryOneMovie(QueryTicketModel queryTicketModel) {
         logger.info("查询Model信息:" + queryTicketModel.toString());
-        String queryDate = getMovieDateString(queryTicketModel.getMovieDate());
+        String queryDate = queryTicketModel.getQueryDate().getTargetDateString();
         logger.info("转换之后的日期:" + queryDate);
         StringBuilder stringBuilder = new StringBuilder();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         for (Cinema cinema : queryTicketModel.getCinemaModelList()) {
-            Document document = getDocument(getSource("https://maoyan.com/cinema/" + cinema.getCinemaId() + "?poi=1549949&movieId=" + queryTicketModel.getMovieId()));
+            Document document = getDocument(getSource("https://maoyan.com/cinema/" + cinema.getCinemaId() + "?poi=271444&movieId=" + queryTicketModel.getMovieId()));
             logger.info("请求返回的document:" + document);
             Elements elements = document.select(".show-list");
             stringBuilder.append("ฅ՞•ﻌ•՞ฅ 任务执行~喵~\n" + "影院名称喵~\n" + "        " + cinema.getCinemaName() + "\n" + "想看的电影喵~\n" + "        " + queryTicketModel.getMovieName() + "\n日期喵~\n");
@@ -131,8 +133,7 @@ public class QueryHandler {
 
     public static void main(String[] args) {
         QueryHandler queryHandler = new QueryHandler();
-        queryHandler.sendNotification("测试一下 请忽略", "https://oapi.dingtalk.com/robot/send?access_token=417e4fa249be90a788ff6e88f33b543b12d00b6c1c29cc72e9367d2306ffc70e");
-    }
+        System.out.println(queryHandler.getMovieDateString(new Date(2020, 11, 19)));    }
 
 //    public Document getDocument(String url) {
 //        Document document = getDocument(getSource("https://maoyan.com/cinema/" + queryModel.getCinemaId() + "?poi=283722&movieId=" + queryModel.getMovieId()));
