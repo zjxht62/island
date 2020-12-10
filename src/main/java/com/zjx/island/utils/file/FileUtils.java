@@ -1,7 +1,9 @@
 package com.zjx.island.utils.file;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Demo class
@@ -9,18 +11,25 @@ import java.util.Arrays;
  * @author trevor.zhao
  * @date 2020/11/19
  */
-public class FileDemo {
+public class FileUtils {
+
+    private class myPrivate {
+
+    }
+
     public static void main(String[] args) {
         String bucketName = "zjxht62";
         File file = new File("/zjx/oss/" + bucketName);
         String[] folders = file.list();
 //        System.out.println(Arrays.toString(folders));
-        getFiles("/zjx/oss/zjxht62");
+        System.out.println(new FileUtils().getFiles("/zjx/oss/zjxht62"));
 
 
     }
 
-    public static void getFiles(String path) {
+    private List<String> nameList = new ArrayList<>();
+
+    public List<String> getFiles(String path) {
         File file = new File(path);
         if (file.isDirectory()) {
             File[] files = file.listFiles();
@@ -28,13 +37,14 @@ public class FileDemo {
                 if (files[i].isDirectory()) {
                     getFiles(files[i].getPath());
                 } else {
-                    System.out.println("文件: " + files[i].getPath());
+                    nameList.add(files[i].getPath());
                 }
             }
         } else {
-            System.out.println("文件: " + file.getPath());
+            nameList.add(file.getPath());
         }
-
-
+        return nameList;
     }
 }
+
+

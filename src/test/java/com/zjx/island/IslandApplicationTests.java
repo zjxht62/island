@@ -34,7 +34,7 @@ public class IslandApplicationTests {
     }
 
     @Test
-    public void testHelper() throws Exception{
+    public String testHelper() throws Exception{
 //        littleHelperController.getLineDirOptionByLine("105");
         BusQueryModel queryModel = new BusQueryModel();
         queryModel.setLine("105");
@@ -43,6 +43,7 @@ public class IslandApplicationTests {
 //        littleHelperController.getStationOptionByDir(queryModel);
 
         littleHelperController.getDistanceByStation(queryModel);
+        return "haah";
     }
 
 }
