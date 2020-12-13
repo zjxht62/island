@@ -5,7 +5,6 @@ import com.zjx.island.biz.helper.PneumoniaBoard.PneumoniaData;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import sun.awt.SunHints;
 
 import javax.xml.transform.Source;
 import java.util.ArrayList;

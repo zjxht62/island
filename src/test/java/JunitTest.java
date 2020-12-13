@@ -1,5 +1,7 @@
+import com.zjx.island.IslandApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -10,7 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @date 2020/12/9
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootConfiguration
+@SpringBootTest(classes = IslandApplication.class)
 //一般使用Test作为单测类的后缀
 public class JunitTest {
 
